@@ -1,0 +1,28 @@
+service: lti-lambda
+provider:
+  name: aws
+  runtime: nodejs4.3
+
+stage: dev
+region: us-east-1
+
+plugins:
+  - serverless-webpack
+
+functions:
+  lti:
+    handler: lti.handler
+    timeout: 10
+    events:
+      - http:
+          path: "lti"
+          integration: lambda
+          method: post
+          cors: true
+          request:
+            passThrough: NEVER
+          response:
+            headers:
+              Content-Type: "'text/html'"
+            template: $input.path('$').body
+
