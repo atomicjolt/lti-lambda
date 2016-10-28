@@ -5,7 +5,7 @@ import querystring from 'querystring';
 
 const lti_shared_secret = "secret";
 
-module.exports.handler = function(event, context, callback) {
+export const handler = (event, context, callback) => {
 
   const protocol = event.headers['X-Forwarded-Proto'];
 
